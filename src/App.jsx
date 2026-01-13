@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Login from "./pages/auth/Login";
 import Overview from "./pages/dashboard/Overview";
 import MyCourses from "./pages/dashboard/MyCourses";
+import CoursePlayer from "./pages/dashboard/CoursePlayer";
 import CourseDetail from "./pages/dashboard/CourseDetail";
 import NotFound from "./pages/NotFound";
 
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="dashboard" element={<DashboardLayout />}>
           <Route index element={<Overview />} />
           <Route path="courses" element={<MyCourses />} />
+          <Route path="/dashboard/player/:courseId" element={<CoursePlayer />} />
           <Route path="courses/:courseId" element={<CourseDetail />} />
         </Route>
       </Route>
