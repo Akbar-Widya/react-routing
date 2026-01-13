@@ -2,16 +2,31 @@ import { Outlet, Link } from "react-router-dom";
 
 export default function MainLayout() {
   return (
-    <div className="min-h-screen flex flex-col font-sans">
-      <nav className="p-4 border-b flex justify-between items-center bg-white shadow-sm">
-        <Link to="/" className="font-bold text-xl text-indigo-600">DevAcademy</Link>
-        <div className="space-x-6 text-sm font-medium">
-          <Link to="/" className="text-gray-600 hover:text-indigo-600">Home</Link>
-          <Link to="/about" className="text-gray-600 hover:text-indigo-600">About</Link>
-          <Link to="/dashboard" className="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow-md">Dashboard</Link>
+    <div className="min-h-screen flex flex-col font-sans bg-white">
+      {/* Navbar: Sharp, zero-shadow, hairline border */}
+      <nav className="h-20 border-b border-slate-100 flex justify-between items-center px-8 md:px-12 bg-white sticky top-0 z-50">
+        <Link to="/" className="font-black text-xl tracking-tighter text-slate-900 uppercase">
+          Dev<span className="text-indigo-600">Academy</span>
+        </Link>
+        
+        <div className="flex items-center gap-10">
+          <div className="hidden md:flex space-x-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+            <Link to="/" className="hover:text-slate-900 transition-colors">Home</Link>
+            <Link to="/about" className="hover:text-slate-900 transition-colors">About</Link>
+          </div>
+          <Link 
+            to="/dashboard" 
+            className="border-2 border-slate-900 px-6 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 hover:bg-slate-900 hover:text-white transition-all"
+          >
+            Dashboard
+          </Link>
         </div>
       </nav>
-      <main className="flex-grow container mx-auto p-8"><Outlet /></main>
+
+      {/* Main Content Area */}
+      <main className="flex-grow">
+        <Outlet />
+      </main>
     </div>
   );
 }

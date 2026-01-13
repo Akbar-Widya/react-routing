@@ -2,6 +2,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 export default function MyCourses() {
   const [searchParams, setSearchParams] = useSearchParams();
+  // useSearchParams looks like useState, it can have updater function too.
   const query = searchParams.get("search") || "";
   const courses = [
     { id: "react-101", title: "React Router Mastery" },
