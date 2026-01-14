@@ -1,14 +1,11 @@
-import { useState, useMemo } from "react"; // 1. Added React hooks
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useStore } from "../store/useStore";
 
 export default function Home() {
   const courses = useStore((state) => state.courses);
-
-  // 2. Search State
   const [query, setQuery] = useState("");
 
-  // 3. Filtered Logic (stripping distractions/noise)
   const filteredCourses = useMemo(() => {
     return courses.filter(
       (course) =>
@@ -19,12 +16,12 @@ export default function Home() {
 
   return (
     <div className="max-w-6xl mx-auto px-8 font-sans">
-      {/* --- HERO: Oaks Protocol Branding --- */}
+      {/* --- HERO: Professional & Minimal --- */}
       <section className="py-32 md:py-48 flex flex-col items-start border-b border-slate-100">
         <div className="flex items-center gap-4 mb-8">
           <div className="w-8 h-[2px] bg-slate-900"></div>
-          <p className="text-xs font-semibold tracking-tight text-slate-900">
-            Oaks Protocol // Digital Skills Index 2026
+          <p className="text-xs font-semibold tracking-tight text-slate-900 uppercase">
+            The Oaks Method // Professional Skills Index 2026
           </p>
         </div>
 
@@ -35,7 +32,7 @@ export default function Home() {
 
         <p className="text-xl text-slate-600 max-w-md leading-relaxed mb-12 font-medium">
           A disciplined environment for high-demand mastery. Professional
-          training stripped of distraction.
+          training stripped of noise and distraction.
         </p>
 
         <Link
@@ -49,26 +46,24 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* --- SEARCH --- */}
+      {/* --- SEARCH: Search by Course --- */}
       <section className="pt-24 pb-8">
         <div className="flex flex-col gap-12">
-          {/* Heading Group */}
           <div className="space-y-2">
             <p className="text-[10px] font-black text-indigo-600 uppercase tracking-[0.3em]">
-              Curriculum Index
+              Enrollment Portal
             </p>
             <h2 className="text-4xl font-black text-slate-900 uppercase tracking-tighter">
-              Available Modules
+              Available Courses
             </h2>
           </div>
 
-          {/* Search Input - Full Width for better 'Air' */}
           <div className="relative group">
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by title or topic.."
+              placeholder="Search curriculum by title or category..."
               className="w-full bg-transparent border-b border-slate-200 py-4 text-[11px] font-bold uppercase tracking-[0.2em] focus:outline-none focus:border-indigo-600 transition-all placeholder:text-slate-300"
             />
             {query && (
@@ -76,14 +71,14 @@ export default function Home() {
                 onClick={() => setQuery("")}
                 className="absolute right-0 top-1/2 -translate-y-1/2 text-[10px] font-black text-slate-400 hover:text-indigo-600"
               >
-                [ CLEAR FILTER ]
+                [ RESET SEARCH ]
               </button>
             )}
           </div>
         </div>
       </section>
 
-      {/* --- LIST: Advanced Modules --- */}
+      {/* --- LIST: Course Selection --- */}
       <section className="pb-24">
         {filteredCourses.length > 0 ? (
           filteredCourses.map((course, index) => (
@@ -98,22 +93,22 @@ export default function Home() {
                 </span>
 
                 <div className="max-w-xl">
-                  <span className="text-[10px] font-bold text-indigo-500 mb-2 block tracking-tight">
-                    Advanced Module
+                  <span className="text-[10px] font-bold text-indigo-500 mb-2 block tracking-tight uppercase">
+                    Professional Course
                   </span>
                   <h3 className="text-3xl font-bold text-slate-900 group-hover:text-indigo-600 leading-tight">
                     {course.title}
                   </h3>
                   <p className="text-slate-600 mt-2 font-medium leading-relaxed">
                     {course.description ||
-                      "In-depth implementation of scalable professional patterns."}
+                      "In-depth implementation of scalable industry patterns."}
                   </p>
                 </div>
               </div>
 
               <div className="mt-8 md:mt-0 flex items-center gap-12 self-end md:self-center">
                 <div className="text-right">
-                  <p className="text-[10px] font-bold text-slate-300 mb-1">
+                  <p className="text-[10px] font-bold text-slate-300 mb-1 uppercase">
                     Tuition
                   </p>
                   <p className="font-mono text-sm font-bold text-slate-900">
@@ -130,8 +125,8 @@ export default function Home() {
           ))
         ) : (
           <div className="py-24 text-center">
-            <p className="font-mono text-[10px] text-slate-400 uppercase tracking-widest italic">
-              0x00 // No modules found matching "{query}"
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">
+              No courses found matching "{query}"
             </p>
           </div>
         )}
@@ -143,23 +138,23 @@ export default function Home() {
           {[
             {
               title: "Access",
-              desc: "Lifetime access to all enrolled modules. Includes future curriculum updates.",
+              desc: "Lifetime access to all modules within an enrolled course. Includes curriculum updates.",
             },
             {
               title: "Certification",
-              desc: "Digital credentials issued upon 100% completion of any Advanced Module.",
+              desc: "Digital credentials issued upon 100% completion of all modules and lessons.",
             },
             {
-              title: "Support",
-              desc: "Direct communication with instructors via the student dashboard.",
+              title: "Mentorship",
+              desc: "Direct communication with senior instructors via the student dashboard.",
             },
             {
-              title: "Investment",
-              desc: "One-time tuition fee per module. No recurring subscriptions or hidden costs.",
+              title: "Structure",
+              desc: "One-time tuition fee per course. No recurring subscriptions or hidden costs.",
             },
           ].map((item) => (
             <div key={item.title} className="space-y-3">
-              <h4 className="text-sm font-bold text-slate-900 tracking-tight">
+              <h4 className="text-sm font-bold text-slate-900 tracking-tight uppercase">
                 {item.title}
               </h4>
               <p className="text-xs text-slate-500 leading-relaxed font-medium">
@@ -170,15 +165,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- FOOTER: Oaks Protocol Signature --- */}
+      {/* --- FOOTER --- */}
       <footer className="py-24 border-t border-slate-100 flex justify-between items-center">
-        <span className="text-xs font-semibold tracking-tight text-slate-900">
-          System // Logic // Mastery
+        <span className="text-xs font-semibold tracking-tight text-slate-900 uppercase">
+          Focus // Knowledge // Mastery
         </span>
 
         <div className="flex items-center gap-8">
           <span className="text-[10px] font-bold text-slate-300 tracking-widest uppercase">
-            © 2026 Oaks Protocol
+            © 2026 Oaks Method
           </span>
           <div className="w-2 h-2 bg-indigo-600"></div>
         </div>

@@ -5,12 +5,11 @@ import { useStore } from "../../store/useStore";
 export default function CoursePlayer() {
   const { courseId } = useParams();
 
-  // 1. Pull raw data from the store
   const courses = useStore((state) => state.courses);
   const allModules = useStore((state) => state.modules);
   const completedLessons = useStore((state) => state.completedLessons);
   const toggleComplete = useStore((state) => state.toggleComplete);
-  console.log("All Modules in CoursePlayer:", allModules);
+
   const courseData = useMemo(() => {
     const course = courses.find((c) => c.id === courseId);
     if (!course) return null;
@@ -22,12 +21,9 @@ export default function CoursePlayer() {
     return { ...course, modules: courseModules };
   }, [courseId, courses, allModules]);
 
-  // 3. UI State for Navigation
-  // Initialize with the first lesson ID if available
   const firstLessonId = courseData?.modules[0]?.lessons[0]?.id;
   const [activeLessonId, setActiveLessonId] = useState(firstLessonId);
 
-  // 4. Find the current lesson object to display its content
   const currentLesson = useMemo(() => {
     if (!courseData) return null;
     for (const mod of courseData.modules) {
@@ -39,17 +35,14 @@ export default function CoursePlayer() {
     return null;
   }, [courseData, activeLessonId, firstLessonId]);
 
-  // 1. Flatten the modules/lessons into one single list
   const flatLessons = useMemo(() => {
-    return courseData.modules.flatMap((m) => m.lessons);
+    return courseData ? courseData.modules.flatMap((m) => m.lessons) : [];
   }, [courseData]);
 
-  // 2. Find where we are in that list
   const currentIndex = flatLessons.findIndex(
     (l) => l.id === (activeLessonId || firstLessonId)
   );
 
-  // 3. Navigation Logic
   const handleNext = () => {
     if (currentIndex < flatLessons.length - 1) {
       setActiveLessonId(flatLessons[currentIndex + 1].id);
@@ -63,20 +56,20 @@ export default function CoursePlayer() {
   };
 
   if (!courseData)
-    return <div className="p-20 font-mono">0x404 // Protocol Lost</div>;
+    return <div className="p-20 font-mono text-xs uppercase tracking-widest text-slate-400">Course content not found.</div>;
 
   return (
     <div className="flex h-screen bg-white font-sans overflow-hidden">
-      {/* SIDEBAR: The Tree Structure */}
+      {/* SIDEBAR: Curriculum Navigation */}
       <aside className="w-80 border-r border-slate-100 flex flex-col bg-white">
         <div className="p-6 border-b border-slate-100">
           <Link
             to={`/dashboard/courses/${courseId}`}
-            className="text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-indigo-600"
+            className="text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-indigo-600 transition-colors"
           >
-            ← Back to Syllabus
+            ← Back to Overview
           </Link>
-          <h2 className="mt-4 text-lg font-black tracking-tighter text-slate-900 uppercase">
+          <h2 className="mt-4 text-lg font-black tracking-tighter text-slate-900 uppercase leading-tight">
             {courseData.title}
           </h2>
         </div>
@@ -124,8 +117,8 @@ export default function CoursePlayer() {
         </nav>
       </aside>
 
-      {/* MAIN STAGE: The Content */}
-      <main className="w-full flex flex-col bg-white">
+      {/* VIEWER: Lesson Content */}
+      <main className="flex-1 flex flex-col bg-white">
         <div className="h-16 border-b border-slate-100 flex items-center px-10">
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
             {courseData.title} /{" "}
@@ -134,51 +127,63 @@ export default function CoursePlayer() {
         </div>
 
         <div className="p-10 overflow-y-auto">
-          <div className="w-full mx-auto">
-            {/* Video Box */}
-            <div className="aspect-video bg-slate-900 flex items-center justify-center text-slate-500 font-mono text-xs italic">
-              [ Source: {currentLesson?.contentUrl} ]
+          <div className="max-w-5xl mx-auto">
+            {/* Media Player Placeholder */}
+            <div className="aspect-video bg-slate-900 flex flex-col items-center justify-center text-slate-500 font-mono text-[10px] uppercase tracking-[0.2em]">
+              <div className="mb-4 w-12 h-12 border border-slate-700 flex items-center justify-center rounded-full">
+                <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-slate-500 border-b-[6px] border-b-transparent ml-1"></div>
+              </div>
+              Streaming Source: {currentLesson?.contentUrl}
             </div>
 
             <div className="mt-10 border-b border-slate-100 pb-10">
-              <h1 className="text-4xl font-black text-slate-900 tracking-tighter">
-                {currentLesson?.title}
-              </h1>
-              <p className="mt-4 text-slate-600 leading-relaxed max-w-2xl font-medium">
-                {/* This will now show the lesson description once added to mock data */}
-                {currentLesson?.description ||
-                  "No technical briefing available for this lesson."}
-              </p>
-              <button
-                onClick={() => toggleComplete(currentLesson?.id)}
-                className={`mt-6 px-6 py-2 text-[10px] font-bold uppercase tracking-widest border-2 transition-all ${
-                  completedLessons.includes(currentLesson?.id)
-                    ? "bg-indigo-600 border-indigo-600 text-white"
-                    : "border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white"
-                }`}
-              >
-                {completedLessons.includes(currentLesson?.id)
-                  ? "Mark Incomplete"
-                  : "Mark as Completed"}
-              </button>
+              <div className="flex justify-between items-start">
+                <div className="max-w-2xl">
+                  <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase">
+                    {currentLesson?.title}
+                  </h1>
+                  <p className="mt-4 text-slate-600 leading-relaxed font-medium">
+                    {currentLesson?.description ||
+                      "No lesson summary provided."}
+                  </p>
+                </div>
+                
+                <button
+                  onClick={() => toggleComplete(currentLesson?.id)}
+                  className={`px-6 py-3 text-[10px] font-black uppercase tracking-widest border-2 transition-all ${
+                    completedLessons.includes(currentLesson?.id)
+                      ? "bg-indigo-600 border-indigo-600 text-white"
+                      : "border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white"
+                  }`}
+                >
+                  {completedLessons.includes(currentLesson?.id)
+                    ? "Mark Incomplete"
+                    : "Complete Lesson"}
+                </button>
+              </div>
             </div>
 
-            {/* Navigation */}
-            <div className="py-10 flex gap-4 items-center justify-end">
-              <button
-                onClick={handlePrev}
-                disabled={currentIndex === 0}
-                className="px-8 py-4 border border-slate-200 text-[10px] font-black uppercase tracking-widest hover:bg-slate-50"
-              >
-                Previous Lesson
-              </button>
-              <button
-                onClick={handleNext}
-                disabled={currentIndex === flatLessons.length - 1}
-                className="px-8 py-4 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:bg-indigo-600"
-              >
-                Next Lesson
-              </button>
+            {/* Pagination */}
+            <div className="py-10 flex gap-4 items-center justify-between">
+              <div className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">
+                Lesson {currentIndex + 1} of {flatLessons.length}
+              </div>
+              <div className="flex gap-4">
+                <button
+                  onClick={handlePrev}
+                  disabled={currentIndex === 0}
+                  className="px-8 py-4 border border-slate-200 text-[10px] font-black uppercase tracking-widest hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={handleNext}
+                  disabled={currentIndex === flatLessons.length - 1}
+                  className="px-8 py-4 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:bg-indigo-600 disabled:opacity-30 transition-all"
+                >
+                  Next Lesson
+                </button>
+              </div>
             </div>
           </div>
         </div>

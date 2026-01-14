@@ -15,8 +15,8 @@ export default function Overview() {
     return Math.round(total / courses.length);
   }, [courses, getCourseProgress]);
 
-  // Main featured course: First one that is started but not finished
-  const currentMission = useMemo(() => {
+  // Featured Course: Most recently active course that isn't finished
+  const currentCourse = useMemo(() => {
     if (!courses?.length) return null;
     return (
       courses.find((c) => {
@@ -26,8 +26,6 @@ export default function Overview() {
     );
   }, [courses, getCourseProgress]);
 
-  // CORRECTED LOGIC: Sort all courses by progress and take the top 3
-  // This ensures "Recent Courses" shows where you are actually spending time.
   const recentCourses = useMemo(() => {
     return [...courses]
       .filter((c) => getCourseProgress(c.id) > 0)
@@ -56,7 +54,7 @@ export default function Overview() {
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[
-          { label: "Active Branches", value: courses?.length || 0 },
+          { label: "Active Courses", value: courses?.length || 0 },
           { label: "Total Progress", value: `${totalMastery}%` },
           {
             label: "System Status",
@@ -79,10 +77,10 @@ export default function Overview() {
         ))}
       </div>
 
-      {currentMission && (
+      {currentCourse && (
         <section className="bg-slate-900 p-10 text-white relative overflow-hidden">
           <div className="absolute -right-4 -bottom-10 text-[12rem] font-black text-white/[0.03] italic select-none pointer-events-none">
-            {getCourseProgress(currentMission.id)}%
+            {getCourseProgress(currentCourse.id)}%
           </div>
           <div className="relative z-10">
             <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-indigo-400 mb-6 flex items-center gap-3">
@@ -92,15 +90,15 @@ export default function Overview() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               <div>
                 <h3 className="text-3xl font-bold tracking-tight uppercase">
-                  {currentMission.title}
+                  {currentCourse.title}
                 </h3>
                 <p className="text-slate-400 mt-2 font-mono text-sm italic">
-                  Progress: {getCourseProgress(currentMission.id)}%
+                  Current Mastery: {getCourseProgress(currentCourse.id)}%
                 </p>
               </div>
               <Link
-                to={`/dashboard/player/${currentMission.id}`}
-                className="bg-white text-slate-900 px-10 py-5 text-[10px] font-black uppercase tracking-widest hover:bg-indigo-500 hover:text-white transition-all"
+                to={`/dashboard/player/${currentCourse.id}`}
+                className="bg-white text-slate-900 px-10 py-5 text-[10px] font-black uppercase tracking-widest hover:bg-indigo-600 hover:text-white transition-all"
               >
                 Resume Course
               </Link>
@@ -109,60 +107,62 @@ export default function Overview() {
         </section>
       )}
 
-      {/* RECENT COURSES - Fixed terminology and logic */}
+      {/* RECENT ACTIVITY */}
       <section className="space-y-4">
-        <h2 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-8">
+        <h2 className="text-[10px] font-black text-slate-900 uppercase tracking-widest mb-8">
           Recent Activity
         </h2>
 
-        {recentCourses.length > 0 ? (
-          recentCourses.map((course, index) => {
-            const progress = getCourseProgress(course.id);
-            return (
-              <Link
-                key={course.id}
-                to={`/dashboard/courses/${course.id}`}
-                className="group flex flex-col py-10 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
-              >
-                <div className="flex justify-between items-start mb-6">
-                  <div className="flex items-center gap-8">
-                    <span className="font-mono text-[10px] font-bold text-slate-400">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="text-2xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
-                        {course.title}
-                      </h3>
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
-                        {course.category || "General"}
+        <div className="space-y-0">
+          {recentCourses.length > 0 ? (
+            recentCourses.map((course, index) => {
+              const progress = getCourseProgress(course.id);
+              return (
+                <Link
+                  key={course.id}
+                  to={`/dashboard/courses/${course.id}`}
+                  className="group flex flex-col py-10 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
+                >
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="flex items-center gap-8">
+                      <span className="font-mono text-[10px] font-bold text-slate-400">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <h3 className="text-2xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                          {course.title}
+                        </h3>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                          {course.category || "General"}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-mono text-sm font-black text-slate-900">
+                        {progress}%
+                      </p>
+                      <p className="text-[9px] font-bold text-slate-300 uppercase tracking-tighter">
+                        Mastery
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-mono text-sm font-black text-slate-900">
-                      {progress}%
-                    </p>
-                    <p className="text-[9px] font-bold text-slate-300 uppercase tracking-tighter">
-                      Mastery
-                    </p>
+                  <div className="w-full h-[2px] bg-slate-100 overflow-hidden">
+                    <div
+                      className="h-full bg-indigo-600 transition-all duration-1000 ease-out"
+                      style={{ width: `${progress}%` }}
+                    />
                   </div>
-                </div>
-                <div className="w-full h-[2px] bg-slate-100 overflow-hidden">
-                  <div
-                    className="h-full bg-indigo-600 transition-all duration-1000 ease-out"
-                    style={{ width: `${progress}%` }}
-                  />
-                </div>
-              </Link>
-            );
-          })
-        ) : (
-          <div className="py-20 text-center border-b border-slate-100 -mx-4">
-            <p className="text-[10px] font-mono text-slate-300 uppercase tracking-widest italic">
-              No recent course history detected.
-            </p>
-          </div>
-        )}
+                </Link>
+              );
+            })
+          ) : (
+            <div className="py-20 text-center border-b border-slate-100 -mx-4">
+              <p className="text-[10px] font-mono text-slate-300 uppercase tracking-widest italic">
+                No recent activity recorded.
+              </p>
+            </div>
+          )}
+        </div>
       </section>
     </div>
   );
