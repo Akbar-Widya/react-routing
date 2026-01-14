@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useStore } from "../store/useStore";
 
 export default function Home() {
-  const courses = useStore((state) => state.courses);
+  // 1. Get courses AND login status from the store
+  const { courses, isLoggedIn } = useStore();
   const [query, setQuery] = useState("");
 
   const filteredCourses = useMemo(() => {
@@ -14,14 +15,17 @@ export default function Home() {
     );
   }, [courses, query]);
 
+  // 2. Determine the destination based on login status
+  const destination = isLoggedIn ? "/dashboard" : "/login";
+
   return (
     <div className="max-w-6xl mx-auto px-8 font-sans">
-      {/* --- HERO: Professional & Minimal --- */}
+      {/* --- HERO --- */}
       <section className="py-32 md:py-48 flex flex-col items-start border-b border-slate-100">
         <div className="flex items-center gap-4 mb-8">
           <div className="w-8 h-[2px] bg-slate-900"></div>
           <p className="text-xs font-semibold tracking-tight text-slate-900 uppercase">
-            The Oaks Method // Professional Skills Index 2026
+            The Oaks Protocol // Professional Skills Index 2026
           </p>
         </div>
 
@@ -35,18 +39,19 @@ export default function Home() {
           training stripped of noise and distraction.
         </p>
 
+        {/* Dynamic Link for Hero Button */}
         <Link
-          to="/dashboard"
+          to={destination}
           className="group inline-flex items-center gap-6 bg-slate-900 text-white px-8 py-5 text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-200 hover:bg-indigo-600"
         >
-          Explore Curriculum
+          Explore Courses
           <span className="group-hover:translate-x-1 transition-transform duration-200">
             →
           </span>
         </Link>
       </section>
 
-      {/* --- SEARCH: Search by Course --- */}
+      {/* --- SEARCH --- */}
       <section className="pt-24 pb-8">
         <div className="flex flex-col gap-12">
           <div className="space-y-2">
@@ -78,13 +83,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- LIST: Course Selection --- */}
+      {/* --- LIST --- */}
       <section className="pb-24">
         {filteredCourses.length > 0 ? (
           filteredCourses.map((course, index) => (
             <Link
               key={course.id}
-              to="/login"
+              // 3. Use the dynamic destination here
+              to={destination}
               className="group flex flex-col md:flex-row md:items-center justify-between py-12 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
             >
               <div className="flex items-start md:items-center gap-10 md:gap-20">
@@ -173,7 +179,7 @@ export default function Home() {
 
         <div className="flex items-center gap-8">
           <span className="text-[10px] font-bold text-slate-300 tracking-widest uppercase">
-            © 2026 Oaks Method
+            © 2026 Oaks Protocol
           </span>
           <div className="w-2 h-2 bg-indigo-600"></div>
         </div>

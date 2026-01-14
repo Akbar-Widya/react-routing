@@ -56,11 +56,15 @@ export default function CoursePlayer() {
   };
 
   if (!courseData)
-    return <div className="p-20 font-mono text-xs uppercase tracking-widest text-slate-400">Course content not found.</div>;
+    return (
+      <div className="p-20 font-mono text-xs uppercase tracking-widest text-slate-400">
+        Course content not found.
+      </div>
+    );
 
   return (
     <div className="flex h-screen bg-white font-sans overflow-hidden">
-      {/* SIDEBAR: Curriculum Navigation */}
+      {/* SIDEBAR: Courses Navigation */}
       <aside className="w-80 border-r border-slate-100 flex flex-col bg-white">
         <div className="p-6 border-b border-slate-100">
           <Link
@@ -152,7 +156,7 @@ export default function CoursePlayer() {
                       "No lesson summary provided."}
                   </p>
                 </div>
-                
+
                 <button
                   onClick={() => toggleComplete(currentLesson?.id)}
                   className={`px-6 py-3 text-[10px] font-bold uppercase tracking-widest border-2 transition-all ${
@@ -194,5 +198,5 @@ export default function CoursePlayer() {
         </div>
       </main>
     </div>
-  )
+  );
 }

@@ -1,12 +1,13 @@
 import { Outlet, NavLink, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useStore } from "../store/useStore";
 
 export default function DashboardLayout() {
-  // Check screen width to determine initial state
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
   const navigate = useNavigate();
 
-  // Handle window resizing to ensure UX remains consistent
+  const { currentUser, logout } = useStore();
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 1024) {
@@ -21,7 +22,7 @@ export default function DashboardLayout() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
+    logout();
     navigate("/login");
   };
 
@@ -34,13 +35,15 @@ export default function DashboardLayout() {
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-white font-sans">
-      
       {/* SIDEBAR */}
-      <aside 
-        className={`${sidebarOpen ? "translate-x-0 w-full lg:w-64" : "-translate-x-full lg:w-0 lg:opacity-0"} 
+      <aside
+        className={`${
+          sidebarOpen
+            ? "translate-x-0 w-full lg:w-64"
+            : "-translate-x-full lg:w-0 lg:opacity-0"
+        } 
           fixed lg:sticky top-0 h-screen bg-white z-[60] border-r border-slate-100 flex flex-col transition-all duration-300 ease-in-out overflow-hidden`}
       >
-        {/* Sidebar Header with X */}
         <div className="h-20 flex items-center justify-between px-8 lg:px-10 border-b border-slate-100">
           <Link to="/" className="block">
             <div className="flex items-baseline gap-1">
@@ -48,12 +51,12 @@ export default function DashboardLayout() {
                 Oaks
               </h2>
               <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">
-                Protocol
+                Learning
               </span>
             </div>
           </Link>
 
-          <button 
+          <button
             onClick={() => setSidebarOpen(false)}
             className="relative w-5 h-5 flex items-center justify-center hover:opacity-50 transition-opacity"
           >
@@ -62,32 +65,38 @@ export default function DashboardLayout() {
           </button>
         </div>
 
-        {/* Navigation */}
         <nav className="flex flex-col mt-4">
           <NavLink to="/dashboard" end className={navClass}>
             Overview
           </NavLink>
           <NavLink to="/dashboard/courses" className={navClass}>
-            Curriculum
+            Courses
           </NavLink>
         </nav>
 
-        <div className="mt-auto border-t border-slate-100">
+        {/* Footer with User Name and Logout */}
+        <div className="mt-auto border-t border-slate-100 p-8">
+          <div className="mb-4">
+            <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+              Logged in as
+            </p>
+            <p className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest truncate">
+              {currentUser?.name || "User"}
+            </p>
+          </div>
           <button
             onClick={handleLogout}
-            className="w-full px-8 py-6 text-left text-[9px] font-black uppercase tracking-widest text-slate-300 hover:text-red-500 transition-colors"
+            className="w-full text-left text-[9px] font-black uppercase tracking-widest text-slate-300 hover:text-red-500 transition-colors"
           >
-            Sign Out
+            Logout
           </button>
         </div>
       </aside>
 
       {/* MAIN CONTENT AREA */}
       <main className="flex-1 flex flex-col min-w-0 bg-white relative">
-        
-        {/* Fixed Top-Fix Hamburger Menu with Shadow */}
         {!sidebarOpen && (
-          <button 
+          <button
             onClick={() => setSidebarOpen(true)}
             className="fixed top-6 right-6 z-50 bg-white p-4 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] border border-slate-100 hover:border-indigo-600 transition-all flex flex-col gap-1"
             aria-label="Open Menu"
@@ -98,17 +107,23 @@ export default function DashboardLayout() {
           </button>
         )}
 
-        {/* Content Container */}
-        <div className={`flex-1 overflow-y-auto ${!sidebarOpen ? 'pt-24' : 'pt-0'} lg:p-16 transition-all duration-300`}>
-          <div className={`${sidebarOpen ? "max-w-8xl" : "max-w-full"} mx-auto px-6 lg:px-0 transition-all duration-500`}>
+        <div
+          className={`flex-1 overflow-y-auto ${
+            !sidebarOpen ? "pt-24" : "pt-0"
+          } lg:p-16 transition-all duration-300`}
+        >
+          <div
+            className={`${
+              sidebarOpen ? "max-w-8xl" : "max-w-full"
+            } mx-auto px-6 lg:px-0 transition-all duration-500`}
+          >
             <Outlet />
           </div>
         </div>
       </main>
 
-      {/* Overlay for mobile when sidebar is open */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-slate-900/10 backdrop-blur-sm z-[55] lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />

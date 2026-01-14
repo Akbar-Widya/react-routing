@@ -42,7 +42,7 @@ export default function CourseDetail() {
             to="/dashboard/courses"
             className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest hover:text-indigo-600 transition-colors"
           >
-            ← Back to Curriculum
+            ← Back to Courses
           </Link>
           <span className="text-[10px] font-semibold text-indigo-600 uppercase tracking-widest">
             // {courseData.category || "Professional Training"}
@@ -76,7 +76,7 @@ export default function CourseDetail() {
         </Link>
       </section>
 
-      {/* --- Curriculum Breakdown --- */}
+      {/* --- Courses Breakdown --- */}
       <section className="border-t border-slate-100 pt-12">
         <h3 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-8">
           Course Curriculum

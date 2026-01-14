@@ -12,6 +12,7 @@ import MyCourses from "./pages/dashboard/MyCourses";
 import CoursePlayer from "./pages/dashboard/CoursePlayer";
 import CourseDetail from "./pages/dashboard/CourseDetail";
 import NotFound from "./pages/NotFound";
+import Register from "./pages/auth/Register";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
 
       <Route element={<AuthLayout />}>
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register/>} />
       </Route>
 
       <Route element={<ProtectedRoute />}>

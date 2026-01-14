@@ -5,8 +5,15 @@ export default function AuthLayout() {
     <div className="min-h-screen bg-white flex flex-col">
       {/* Minimal Header */}
       <nav className="p-10">
-        <Link to="/" className="font-black text-sm uppercase tracking-[0.5em] text-slate-900">
-          Oaks <span className="text-indigo-600">Method</span>
+        <Link to="/" className="group block">
+          <div className="flex items-baseline gap-1">
+            <h2 className="text-xl font-black tracking-tighter text-slate-900 uppercase">
+              Oaks
+            </h2>
+            <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">
+              Protocol
+            </span>
+          </div>
         </Link>
       </nav>
 
@@ -16,7 +23,7 @@ export default function AuthLayout() {
           <Outlet />
         </div>
       </main>
-      
+
       {/* Clean Footer */}
       <footer className="p-10 text-center">
         <p className="text-[9px] font-bold text-slate-300 uppercase tracking-[0.3em]">

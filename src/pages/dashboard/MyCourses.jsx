@@ -21,11 +21,11 @@ export default function MyCourses() {
             My Library
           </h1>
           <p className="text-slate-500 font-medium mt-2">
-            Your active professional curriculum.
+            Your active courses and learning progress.
           </p>
         </div>
 
-        {/* Minimal Search */}
+        {/* Search */}
         <div className="relative">
           <input
             type="text"
@@ -49,26 +49,28 @@ export default function MyCourses() {
               className="group flex flex-col py-10 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
             >
               <div className="flex justify-between items-start mb-6">
-                <div className="flex items-center gap-8">
-                  <span className="font-mono text-[10px] font-bold text-slate-400">
+                <div className="flex items-center gap-8 min-w-0">
+                  <span className="font-mono text-[10px] font-bold text-slate-400 shrink-0">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <div>
-                    <h3 className="text-2xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                  <div className="min-w-0">
+                    <h3 className="text-2xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors truncate">
                       {course.title}
                     </h3>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
-                      {course.category || "Professional Training"}
+                    {/* Replaced status with one-line description */}
+                    <p className="text-[11px] font-medium text-slate-500 mt-1 truncate">
+                      {course.description ||
+                        "In-depth implementation of scalable industry patterns."}
                     </p>
                   </div>
                 </div>
 
-                <div className="text-right">
+                <div className="text-right shrink-0 ml-4">
                   <p className="font-mono text-sm font-black text-slate-900">
                     {progress}%
                   </p>
                   <p className="text-[9px] font-bold text-slate-300 uppercase tracking-tighter">
-                    Mastery
+                    Progress
                   </p>
                 </div>
               </div>
@@ -83,6 +85,14 @@ export default function MyCourses() {
             </Link>
           );
         })}
+
+        {filteredCourses.length === 0 && (
+          <div className="py-20 text-center">
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+              No results for "{query}"
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

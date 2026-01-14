@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { useMemo } from "react";
 
 export default function Overview() {
-  const { users, courses, getCourseProgress } = useStore();
-  const user = users[0];
+  const { currentUser, courses, getCourseProgress } = useStore();
+  const user = currentUser;
 
   const totalMastery = useMemo(() => {
-    if (!courses?.length) return 0;
+    if (!courses || courses.length === 0) return 0;
     const total = courses.reduce(
       (acc, course) => acc + getCourseProgress(course.id),
       0
@@ -15,7 +15,6 @@ export default function Overview() {
     return Math.round(total / courses.length);
   }, [courses, getCourseProgress]);
 
-  // Featured Course: Most recently active course that isn't finished
   const currentCourse = useMemo(() => {
     if (!courses?.length) return null;
     return (
@@ -36,13 +35,14 @@ export default function Overview() {
   return (
     <div className="space-y-12 max-w-5xl">
       <header>
-        <h1 className="text-6xl font-black text-slate-900 tracking-tighter uppercase leading-[0.8]">
+        <h1 className="text-6xl font-black text-slate-900 tracking-tighter uppercase leading-[0.85]">
           Welcome, <br />
           <span className="text-indigo-600">
-            {user?.name?.split(" ")[0] || "Student"}
+            {/* FIXED: Removed .split() to show full First and Last name */}
+            {user?.name || "Verified Student"}
           </span>
         </h1>
-        <p className="text-slate-500 font-medium mt-6 max-w-xl leading-relaxed">
+        <p className="text-slate-500 font-semibold mt-6 max-w-xl leading-relaxed uppercase text-[10px] tracking-widest">
           System operational. You have achieved{" "}
           <span className="text-slate-900 font-bold">
             {totalMastery}% total mastery
@@ -77,6 +77,7 @@ export default function Overview() {
         ))}
       </div>
 
+      {/* Featured Course */}
       {currentCourse && (
         <section className="bg-slate-900 p-10 text-white relative overflow-hidden">
           <div className="absolute -right-4 -bottom-10 text-[12rem] font-black text-white/[0.03] italic select-none pointer-events-none">
@@ -107,12 +108,11 @@ export default function Overview() {
         </section>
       )}
 
-      {/* RECENT ACTIVITY */}
+      {/* Recent Activity Section */}
       <section className="space-y-4">
         <h2 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-8">
           Recent Activity
         </h2>
-
         <div className="space-y-0">
           {recentCourses.length > 0 ? (
             recentCourses.map((course, index) => {
@@ -124,28 +124,33 @@ export default function Overview() {
                   className="group flex flex-col py-10 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
                 >
                   <div className="flex justify-between items-start mb-6">
-                    <div className="flex items-center gap-8">
-                      <span className="font-mono text-[10px] font-bold text-slate-400">
+                    <div className="flex items-center gap-8 min-w-0">
+                      <span className="font-mono text-[10px] font-bold text-slate-400 shrink-0">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <div>
-                        <h3 className="text-2xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                      <div className="min-w-0">
+                        <h3 className="text-2xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors truncate">
                           {course.title}
                         </h3>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
-                          {course.category || "General"}
+                        {/* Replaced status with one-line description */}
+                        <p className="text-[11px] font-medium text-slate-500 mt-1 truncate">
+                          {course.description ||
+                            "In-depth implementation of scalable industry patterns."}
                         </p>
                       </div>
                     </div>
-                    <div className="text-right">
+
+                    <div className="text-right shrink-0 ml-4">
                       <p className="font-mono text-sm font-black text-slate-900">
                         {progress}%
                       </p>
                       <p className="text-[9px] font-bold text-slate-300 uppercase tracking-tighter">
-                        Mastery
+                        Progress
                       </p>
                     </div>
                   </div>
+
+                  {/* Progress Line */}
                   <div className="w-full h-[2px] bg-slate-100 overflow-hidden">
                     <div
                       className="h-full bg-indigo-600 transition-all duration-1000 ease-out"
