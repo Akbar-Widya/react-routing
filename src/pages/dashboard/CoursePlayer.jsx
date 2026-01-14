@@ -65,11 +65,12 @@ export default function CoursePlayer() {
         <div className="p-6 border-b border-slate-100">
           <Link
             to={`/dashboard/courses/${courseId}`}
-            className="text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-indigo-600 transition-colors"
+            className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest hover:text-indigo-600 transition-colors"
           >
             ← Back to Overview
           </Link>
-          <h2 className="mt-4 text-lg font-black tracking-tighter text-slate-900 uppercase leading-tight">
+          {/* Softened header slightly from font-black to font-bold for the sidebar */}
+          <h2 className="mt-4 text-lg font-bold tracking-tighter text-slate-900 uppercase leading-tight">
             {courseData.title}
           </h2>
         </div>
@@ -78,7 +79,8 @@ export default function CoursePlayer() {
           {courseData.modules.map((module) => (
             <div key={module.id} className="mb-2">
               <div className="bg-slate-50 px-6 py-3 border-b border-slate-100">
-                <p className="text-[10px] font-black text-slate-900 uppercase tracking-wider">
+                {/* Softened Module Title */}
+                <p className="text-[10px] font-semibold text-slate-900 uppercase tracking-wider line-clamp-2">
                   {module.title}
                 </p>
               </div>
@@ -87,17 +89,17 @@ export default function CoursePlayer() {
                 <button
                   key={lesson.id}
                   onClick={() => setActiveLessonId(lesson.id)}
-                  className={`w-full flex items-center px-6 py-4 text-left border-b border-slate-50 transition-all ${
+                  className={`w-full flex items-start px-6 py-4 text-left border-b border-slate-50 transition-all ${
                     (activeLessonId || firstLessonId) === lesson.id
                       ? "bg-indigo-50/30 border-l-2 border-l-indigo-600"
                       : "hover:bg-slate-50 border-l-2 border-l-transparent"
                   }`}
                 >
-                  <span className="font-mono text-[10px] font-bold text-slate-300 mr-4">
+                  <span className="font-mono text-[10px] font-semibold text-slate-300 mr-4 mt-0.5">
                     {String(lesson.position).padStart(2, "0")}
                   </span>
                   <span
-                    className={`text-xs font-semibold ${
+                    className={`text-xs font-semibold line-clamp-2 leading-relaxed ${
                       activeLessonId === lesson.id
                         ? "text-slate-900"
                         : "text-slate-500"
@@ -106,7 +108,7 @@ export default function CoursePlayer() {
                     {lesson.title}
                   </span>
                   {completedLessons.includes(lesson.id) && (
-                    <span className="ml-auto text-indigo-600 text-xs font-bold">
+                    <span className="ml-auto text-indigo-600 text-xs font-semibold">
                       ✓
                     </span>
                   )}
@@ -120,7 +122,8 @@ export default function CoursePlayer() {
       {/* VIEWER: Lesson Content */}
       <main className="flex-1 flex flex-col bg-white">
         <div className="h-16 border-b border-slate-100 flex items-center px-10">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+          {/* Breadcrumb style text softened */}
+          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
             {courseData.title} /{" "}
             <span className="text-indigo-600">{currentLesson?.title}</span>
           </p>
@@ -139,10 +142,12 @@ export default function CoursePlayer() {
             <div className="mt-10 border-b border-slate-100 pb-10">
               <div className="flex justify-between items-start">
                 <div className="max-w-2xl">
+                  {/* Kept Black here for a strong focal point */}
                   <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase">
                     {currentLesson?.title}
                   </h1>
-                  <p className="mt-4 text-slate-600 leading-relaxed font-medium">
+                  {/* Softened body text weight */}
+                  <p className="mt-4 text-slate-600 leading-relaxed font-normal">
                     {currentLesson?.description ||
                       "No lesson summary provided."}
                   </p>
@@ -150,7 +155,7 @@ export default function CoursePlayer() {
                 
                 <button
                   onClick={() => toggleComplete(currentLesson?.id)}
-                  className={`px-6 py-3 text-[10px] font-black uppercase tracking-widest border-2 transition-all ${
+                  className={`px-6 py-3 text-[10px] font-bold uppercase tracking-widest border-2 transition-all ${
                     completedLessons.includes(currentLesson?.id)
                       ? "bg-indigo-600 border-indigo-600 text-white"
                       : "border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white"
@@ -165,21 +170,21 @@ export default function CoursePlayer() {
 
             {/* Pagination */}
             <div className="py-10 flex gap-4 items-center justify-between">
-              <div className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">
+              <div className="text-[10px] font-semibold text-slate-300 uppercase tracking-widest">
                 Lesson {currentIndex + 1} of {flatLessons.length}
               </div>
               <div className="flex gap-4">
                 <button
                   onClick={handlePrev}
                   disabled={currentIndex === 0}
-                  className="px-8 py-4 border border-slate-200 text-[10px] font-black uppercase tracking-widest hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+                  className="px-8 py-4 border border-slate-200 text-[10px] font-bold uppercase tracking-widest hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
                 >
                   Previous
                 </button>
                 <button
                   onClick={handleNext}
                   disabled={currentIndex === flatLessons.length - 1}
-                  className="px-8 py-4 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:bg-indigo-600 disabled:opacity-30 transition-all"
+                  className="px-8 py-4 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-indigo-600 disabled:opacity-30 transition-all"
                 >
                   Next Lesson
                 </button>
@@ -189,5 +194,5 @@ export default function CoursePlayer() {
         </div>
       </main>
     </div>
-  );
+  )
 }

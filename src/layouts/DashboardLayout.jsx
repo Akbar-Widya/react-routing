@@ -100,7 +100,7 @@ export default function DashboardLayout() {
 
         {/* Content Container */}
         <div className={`flex-1 overflow-y-auto ${!sidebarOpen ? 'pt-24' : 'pt-0'} lg:p-16 transition-all duration-300`}>
-          <div className={`${sidebarOpen ? "max-w-5xl" : "max-w-full"} mx-auto px-6 lg:px-0 transition-all duration-500`}>
+          <div className={`${sidebarOpen ? "max-w-8xl" : "max-w-full"} mx-auto px-6 lg:px-0 transition-all duration-500`}>
             <Outlet />
           </div>
         </div>
