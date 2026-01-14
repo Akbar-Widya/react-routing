@@ -144,7 +144,7 @@ export default function Overview() {
                       <p className="font-mono text-sm font-black text-slate-900">
                         {progress}%
                       </p>
-                      <p className="text-[9px] font-bold text-slate-300 uppercase tracking-tighter">
+                      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">
                         Progress
                       </p>
                     </div>
@@ -162,7 +162,7 @@ export default function Overview() {
             })
           ) : (
             <div className="py-20 text-center border-b border-slate-100 -mx-4">
-              <p className="text-[10px] font-mono text-slate-300 uppercase tracking-widest italic">
+              <p className="text-[10px] font-mono text-slate-400 uppercase tracking-widest italic">
                 No recent activity recorded.
               </p>
             </div>

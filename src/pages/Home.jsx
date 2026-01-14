@@ -22,13 +22,6 @@ export default function Home() {
     <div className="max-w-6xl mx-auto px-8 font-sans">
       {/* --- HERO --- */}
       <section className="py-32 md:py-48 flex flex-col items-start border-b border-slate-100">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-8 h-[2px] bg-slate-900"></div>
-          <p className="text-xs font-semibold tracking-tight text-slate-900 uppercase">
-            The Oaks Protocol // Professional Skills Index 2026
-          </p>
-        </div>
-
         <h1 className="text-7xl md:text-9xl font-black text-slate-900 leading-[0.8] tracking-tighter mb-10">
           Skill <br />
           <span className="text-indigo-600">Built.</span>
@@ -69,7 +62,7 @@ export default function Home() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search curriculum by title or category..."
-              className="w-full bg-transparent border-b border-slate-200 py-4 text-[11px] font-bold uppercase tracking-[0.2em] focus:outline-none focus:border-indigo-600 transition-all placeholder:text-slate-300"
+              className="w-full bg-transparent border-b border-slate-200 py-4 text-[11px] font-bold uppercase tracking-[0.2em] focus:outline-none focus:border-indigo-600 transition-all placeholder:text-slate-400"
             />
             {query && (
               <button
@@ -114,7 +107,7 @@ export default function Home() {
 
               <div className="mt-8 md:mt-0 flex items-center gap-12 self-end md:self-center">
                 <div className="text-right">
-                  <p className="text-[10px] font-bold text-slate-300 mb-1 uppercase">
+                  <p className="text-[10px] font-bold text-slate-400 mb-1 uppercase">
                     Tuition
                   </p>
                   <p className="font-mono text-sm font-bold text-slate-900">

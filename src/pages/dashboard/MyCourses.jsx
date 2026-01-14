@@ -32,7 +32,7 @@ export default function MyCourses() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="SEARCH ENROLLED COURSES..."
-            className="w-full bg-transparent border-b border-slate-200 py-3 text-[10px] font-bold uppercase tracking-[0.2em] focus:outline-none focus:border-slate-900 transition-colors placeholder:text-slate-300"
+            className="w-full bg-transparent border-b border-slate-200 py-3 text-[10px] font-bold uppercase tracking-[0.2em] focus:outline-none focus:border-slate-900 transition-colors placeholder:text-slate-400"
           />
         </div>
       </header>
@@ -69,7 +69,7 @@ export default function MyCourses() {
                   <p className="font-mono text-sm font-black text-slate-900">
                     {progress}%
                   </p>
-                  <p className="text-[9px] font-bold text-slate-300 uppercase tracking-tighter">
+                  <p className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">
                     Progress
                   </p>
                 </div>

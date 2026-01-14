@@ -30,7 +30,7 @@ export default function DashboardLayout() {
     `flex items-center px-8 py-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all lg:border-r-2 ${
       isActive
         ? "text-indigo-600 bg-slate-50 border-indigo-600"
-        : "text-slate-400 border-transparent hover:text-slate-900"
+        : "text-slate-500 border-transparent hover:text-slate-900"
     }`;
 
   return (
@@ -86,7 +86,7 @@ export default function DashboardLayout() {
           </div>
           <button
             onClick={handleLogout}
-            className="w-full text-left text-[9px] font-black uppercase tracking-widest text-slate-300 hover:text-red-500 transition-colors"
+            className="w-full text-left text-[12px] font-black uppercase tracking-widest text-slate-500 hover:text-red-500 transition-colors"
           >
             Logout
           </button>

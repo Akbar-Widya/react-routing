@@ -23,7 +23,7 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center items-center px-6 font-sans">
+    <div className="bg-white flex flex-col justify-center items-center px-6 font-sans">
       <div className="w-full max-w-[400px]">
         {/* Branding */}
         <div className="mb-12 text-center">
@@ -51,7 +51,7 @@ export default function Register() {
           )}
 
           <div>
-            <label className="block text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-2">
+            <label className="block text-[10px] font-semibold text-slate-600 uppercase tracking-widest mb-2">
               Full Name
             </label>
             <input
@@ -66,7 +66,7 @@ export default function Register() {
           </div>
 
           <div>
-            <label className="block text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-2">
+            <label className="block text-[10px] font-semibold text-slate-600 uppercase tracking-widest mb-2">
               Email Address
             </label>
             <input
@@ -81,7 +81,7 @@ export default function Register() {
           </div>
 
           <div>
-            <label className="block text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-2">
+            <label className="block text-[10px] font-semibold text-slate-600 uppercase tracking-widest mb-2">
               Password
             </label>
             <input
@@ -112,12 +112,6 @@ export default function Register() {
             </Link>
           </p>
         </div>
-
-        <footer className="mt-12 text-center">
-          <p className="text-[10px] font-semibold text-slate-300 uppercase tracking-widest">
-            LMS Dashboard / v1.0.4
-          </p>
-        </footer>
       </div>
     </div>
   );

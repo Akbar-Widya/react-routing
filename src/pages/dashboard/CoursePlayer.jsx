@@ -174,7 +174,7 @@ export default function CoursePlayer() {
 
             {/* Pagination */}
             <div className="py-10 flex gap-4 items-center justify-between">
-              <div className="text-[10px] font-semibold text-slate-300 uppercase tracking-widest">
+              <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
                 Lesson {currentIndex + 1} of {flatLessons.length}
               </div>
               <div className="flex gap-4">

@@ -2,7 +2,7 @@ import { Outlet, Link } from "react-router-dom";
 
 export default function AuthLayout() {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col justify-between">
       {/* Minimal Header */}
       <nav className="p-10">
         <Link to="/" className="group block">
@@ -18,17 +18,24 @@ export default function AuthLayout() {
       </nav>
 
       {/* Centered Content - No Borders */}
-      <main className="flex-grow flex items-center justify-center px-6">
+      <main className="flex items-center justify-center px-6">
         <div className="w-full max-w-sm">
           <Outlet />
         </div>
       </main>
 
-      {/* Clean Footer */}
-      <footer className="p-10 text-center">
-        <p className="text-[9px] font-bold text-slate-300 uppercase tracking-[0.3em]">
-          &copy; 2026 Professional Education Portal
-        </p>
+      {/* --- FOOTER --- */}
+      <footer className="pb-8 px-6 border-t border-slate-100 flex justify-between items-center">
+        <span className="text-xs font-black tracking-tighter text-slate-900 uppercase">
+          Oaks Protocol
+        </span>
+
+        <div className="flex items-center gap-8">
+          <span className="text-[10px] font-bold text-slate-600 tracking-widest uppercase text-right">
+            Project by Akbar Widya // 2026
+          </span>
+          <div className="w-2 h-2 bg-indigo-600"></div>
+        </div>
       </footer>
     </div>
   );

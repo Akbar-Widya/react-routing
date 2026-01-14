@@ -126,7 +126,7 @@ export default function CourseDetail() {
                           {lesson.title}
                         </span>
                       </div>
-                      <span className="text-[10px] font-mono text-slate-300 italic">
+                      <span className="text-[10px] font-mono text-slate-400 italic">
                         {Math.floor(lesson.duration / 60)}m
                       </span>
                     </div>

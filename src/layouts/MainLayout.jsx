@@ -17,7 +17,7 @@ export default function MainLayout() {
         </Link>
 
         <div className="flex items-center gap-8 md:gap-12">
-          <div className="hidden md:flex space-x-8 text-[10px] font-black uppercase tracking-widest text-slate-400">
+          <div className="hidden md:flex space-x-8 text-[10px] font-black uppercase tracking-widest text-slate-500">
             <Link to="/" className="hover:text-slate-900 transition-colors">
               Courses
             </Link>
