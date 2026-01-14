@@ -14,7 +14,6 @@ export default function CourseDetail() {
     const course = courses.find((c) => c.id === courseId);
     if (!course) return null;
 
-    // Filter modules belonging to this course and sort by position
     const courseModules = allModules
       .filter((m) => m.courseId === courseId)
       .sort((a, b) => a.position - b.position);
@@ -41,15 +40,16 @@ export default function CourseDetail() {
         <div className="flex items-center gap-3 mb-4">
           <Link
             to="/dashboard/courses"
-            className="text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-indigo-600 transition-colors"
+            className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest hover:text-indigo-600 transition-colors"
           >
             ← Back to Curriculum
           </Link>
-          <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">
+          <span className="text-[10px] font-semibold text-indigo-600 uppercase tracking-widest">
             // {courseData.category || "Professional Training"}
           </span>
           <div className="h-[1px] w-8 bg-slate-200"></div>
-          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+          {/* Softened progress label */}
+          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
             {progress}% Mastery
           </span>
         </div>
@@ -78,19 +78,19 @@ export default function CourseDetail() {
 
       {/* --- Curriculum Breakdown --- */}
       <section className="border-t border-slate-100 pt-12">
-        <h3 className="text-[10px] font-black text-slate-900 uppercase tracking-widest mb-8">
+        <h3 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-8">
           Course Curriculum
         </h3>
 
         <div className="space-y-6">
           {courseData.modules.map((module) => (
             <div key={module.id} className="border border-slate-100 bg-white">
-              {/* Module Header */}
+              {/* Module Header - Softened to Semibold */}
               <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
-                <p className="text-[10px] font-bold text-slate-900 uppercase tracking-tight">
+                <p className="text-[10px] font-semibold text-slate-900 uppercase tracking-tight">
                   Module: {module.title}
                 </p>
-                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">
+                <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-tighter">
                   {module.lessons.length} Lessons
                 </span>
               </div>
@@ -108,8 +108,8 @@ export default function CourseDetail() {
                         <span
                           className={`font-mono text-[10px] ${
                             isComplete
-                              ? "text-indigo-600 font-bold"
-                              : "text-slate-300"
+                              ? "text-indigo-600 font-semibold"
+                              : "text-slate-300 font-medium"
                           }`}
                         >
                           {isComplete

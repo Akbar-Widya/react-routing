@@ -109,7 +109,7 @@ export default function Overview() {
 
       {/* RECENT ACTIVITY */}
       <section className="space-y-4">
-        <h2 className="text-[10px] font-black text-slate-900 uppercase tracking-widest mb-8">
+        <h2 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-8">
           Recent Activity
         </h2>
 
