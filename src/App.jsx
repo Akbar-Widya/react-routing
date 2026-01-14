@@ -13,10 +13,12 @@ import CoursePlayer from "./pages/dashboard/CoursePlayer";
 import CourseDetail from "./pages/dashboard/CourseDetail";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/auth/Register";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   return (
     <Routes>
+      <ScrollToTop />
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
@@ -24,14 +26,17 @@ export default function App() {
 
       <Route element={<AuthLayout />}>
         <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register/>} />
+        <Route path="register" element={<Register />} />
       </Route>
 
       <Route element={<ProtectedRoute />}>
         <Route path="dashboard" element={<DashboardLayout />}>
           <Route index element={<Overview />} />
           <Route path="courses" element={<MyCourses />} />
-          <Route path="/dashboard/player/:courseId" element={<CoursePlayer />} />
+          <Route
+            path="/dashboard/player/:courseId"
+            element={<CoursePlayer />}
+          />
           <Route path="courses/:courseId" element={<CourseDetail />} />
         </Route>
       </Route>
