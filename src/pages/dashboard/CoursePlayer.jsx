@@ -65,7 +65,7 @@ export default function CoursePlayer() {
   return (
     <div className="flex h-screen bg-white font-sans overflow-hidden">
       {/* SIDEBAR: Courses Navigation */}
-      <aside className="max-md:hidden w-80 border-r border-slate-100 flex flex-col bg-white">
+      <aside className="hidden md:flex w-80 border-r border-slate-100 flex-col bg-white">
         <div className="p-6 border-b border-slate-100">
           <Link
             to={`/dashboard/courses/${courseId}`}
@@ -125,7 +125,7 @@ export default function CoursePlayer() {
 
       {/* VIEWER: Lesson Content */}
       <main className="flex-1 flex flex-col bg-white">
-        <div className="h-16 border-b border-slate-100 flex items-center px-10 max-md:px-0">
+        <div className="h-16 border-b border-slate-100 flex items-center ">
           {/* Breadcrumb style text softened */}
           <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
             {courseData.title} /{" "}
@@ -133,7 +133,7 @@ export default function CoursePlayer() {
           </p>
         </div>
 
-        <div className="p-10 overflow-y-auto max-md:px-0">
+        <div className="md:p-10 overflow-y-auto">
           <div className="max-w-5xl mx-auto">
             {/* Media Player Placeholder */}
             <div className="aspect-video bg-slate-900 flex flex-col items-center justify-center text-slate-500 font-mono text-[10px] uppercase tracking-[0.2em]">
@@ -144,10 +144,10 @@ export default function CoursePlayer() {
             </div>
 
             <div className="mt-10 border-b border-slate-100 pb-10">
-              <div className="flex justify-between items-start max-md:flex-col max-md:gap-6">
+              <div className="flex justify-between items-start flex-col md:flex-row gap-6">
                 <div className="max-w-2xl">
                   {/* Kept Black here for a strong focal point */}
-                  <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase max-md:text-3xl">
+                  <h1 className="text-3xl font-black text-slate-900 tracking-tighter uppercase md:text-4xl">
                     {currentLesson?.title}
                   </h1>
                   {/* Softened body text weight */}
@@ -173,7 +173,7 @@ export default function CoursePlayer() {
             </div>
 
             {/* Pagination */}
-            <div className="py-10 flex gap-4 items-center justify-between max-md:px-0">
+            <div className="py-10 flex gap-4 items-center justify-between">
               <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
                 Lesson {currentIndex + 1} of {flatLessons.length}
               </div>

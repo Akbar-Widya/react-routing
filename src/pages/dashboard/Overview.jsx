@@ -33,9 +33,9 @@ export default function Overview() {
   }, [courses, getCourseProgress]);
 
   return (
-    <div className="space-y-12 max-md:space-y-6 max-w-5xl">
-      <header className="max-md:p-6">
-        <h1 className="text-6xl max-md:text-4xl font-black text-slate-900 tracking-tighter uppercase leading-[0.85]">
+    <div className="space-y-6 md:space-y-12 max-w-5xl">
+      <header className="p-6 md:p-0">
+        <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter uppercase leading-[0.85]">
           Welcome, <br />
           <span className="text-indigo-600">
             {/* FIXED: Removed .split() to show full First and Last name */}
@@ -52,7 +52,7 @@ export default function Overview() {
       </header>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-md:gap-0">
+      <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4">
         {[
           { label: "Active Courses", value: courses?.length || 0 },
           { label: "Total Progress", value: `${totalMastery}%` },
@@ -79,7 +79,7 @@ export default function Overview() {
 
       {/* Featured Course */}
       {currentCourse && (
-        <section className="bg-slate-900 p-10 max-md:p-6 text-white relative overflow-hidden">
+        <section className="bg-slate-900 p-6 md:p-10 text-white relative overflow-hidden">
           <div className="absolute -right-4 -bottom-10 text-[12rem] font-black text-white/[0.03] italic select-none pointer-events-none">
             {getCourseProgress(currentCourse.id)}%
           </div>
@@ -109,8 +109,8 @@ export default function Overview() {
       )}
 
       {/* Recent Activity Section */}
-      <section className="space-y-4 max-md:space-y-2">
-        <h2 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-8 max-md:mb-4">
+      <section className="space-y-2 md:space-y-4">
+        <h2 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-4 md:mb-8">
           Recent Activity
         </h2>
         <div className="space-y-0">
@@ -121,9 +121,9 @@ export default function Overview() {
                 <Link
                   key={course.id}
                   to={`/dashboard/courses/${course.id}`}
-                  className="group flex flex-col py-10 max-md:py-3 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
+                  className="group flex flex-col py-3 md:py-10 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
                 >
-                  <div className="flex justify-between items-start mb-6 max-md:mb-2">
+                  <div className="flex justify-between items-start mb-2 md:mb-6">
                     <div className="flex items-center gap-8 min-w-0">
                       <span className="font-mono text-[10px] font-bold text-slate-400 shrink-0">
                         {String(index + 1).padStart(2, "0")}

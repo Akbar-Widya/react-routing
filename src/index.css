@@ -12,3 +12,11 @@
 .btn-outline {
   @apply border-2 border-slate-900 px-6 py-2 text-[10px] font-black uppercase tracking-widest text-slate-900 hover:bg-slate-900 hover:text-white transition-all
 }
+
+.btn-primary {
+  @apply inline-flex items-center gap-6 bg-slate-900 text-white px-8 py-5 text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-200 hover:bg-indigo-600
+}
+
+.section {
+  @apply pt-25 pb-15
+}

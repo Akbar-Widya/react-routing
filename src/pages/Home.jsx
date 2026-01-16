@@ -14,10 +14,6 @@ export default function Home() {
         course.description?.toLowerCase().includes(query.toLowerCase())
     );
   }, [courses, query]);
-
-  // 2. Determine the destination based on login status
-  const destination = isLoggedIn ? "/dashboard" : "/login";
-
   return (
     <div className="max-w-6xl mx-auto px-8 font-sans">
       {/* --- HERO --- */}
@@ -34,8 +30,8 @@ export default function Home() {
 
         {/* Dynamic Link for Hero Button */}
         <Link
-          to={destination}
-          className="group inline-flex items-center gap-6 bg-slate-900 text-white px-8 py-5 text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-200 hover:bg-indigo-600"
+          to={isLoggedIn ? "/dashboard" : "/login"}
+          className="btn-primary group"
         >
           Explore Courses
           <span className="group-hover:translate-x-1 transition-transform duration-200">
@@ -56,7 +52,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="relative group">
+          <div className="relative">
             <input
               type="text"
               value={query}
@@ -82,12 +78,11 @@ export default function Home() {
           filteredCourses.map((course, index) => (
             <Link
               key={course.id}
-              // 3. Use the dynamic destination here
-              to={destination}
-              className="group flex flex-col md:flex-row md:items-center justify-between py-12 max-md:py-6 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
+              to={isLoggedIn ? "/dashboard" : "/login"}
+              className="group flex flex-col md:flex-row md:items-center justify-between py-6 md:py-12 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
             >
               <div className="flex items-start md:items-center gap-10 md:gap-20">
-                <span className="font-mono text-[10px] font-bold text-slate-400 group-hover:text-indigo-600 max-md:hidden">
+                <span className="font-mono text-[10px] font-bold text-slate-400 group-hover:text-indigo-600 hidden md:inline">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
@@ -95,17 +90,17 @@ export default function Home() {
                   <span className="text-[10px] font-bold text-indigo-500 mb-2 block tracking-tight uppercase">
                     Professional Course
                   </span>
-                  <h3 className="text-3xl max-md:text-2xl font-bold text-slate-900 group-hover:text-indigo-600 leading-tighter">
+                  <h3 className="text-2xl md:text-3xl font-bold text-slate-900 group-hover:text-indigo-600 leading-tighter">
                     {course.title}
                   </h3>
-                  <p className="text-slate-600 mt-2 font-medium max-md:text-sm leading-relaxed">
+                  <p className="text-slate-600 mt-2 text-sm md:font-medium leading-relaxed">
                     {course.description ||
                       "In-depth implementation of scalable industry patterns."}
                   </p>
                 </div>
               </div>
 
-              <div className="mt-4 md:mt-0 flex items-center gap-12 max-md:gap-6 self-end md:self-center">
+              <div className="mt-4 md:mt-0 flex items-center gap-6 md:gap-12 self-end md:self-center">
                 <div className="text-right">
                   <p className="text-[10px] font-bold text-slate-400 mb-1 uppercase">
                     Tuition
@@ -123,7 +118,7 @@ export default function Home() {
             </Link>
           ))
         ) : (
-          <div className="py-24 max-md:py-12 text-center">
+          <div className="py-12 md:py-24 text-center">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">
               No courses found matching "{query}"
             </p>
@@ -132,8 +127,8 @@ export default function Home() {
       </section>
 
       {/* --- TRUST GRID --- */}
-      <section className="py-24 max-md:py-12 border-t border-slate-100">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 max-md:gap-8">
+      <section className="py-12 md:py-24 border-t border-slate-100">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {[
             {
               title: "Access",
@@ -165,7 +160,7 @@ export default function Home() {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="py-24 max-md:py-8 border-t border-slate-100 flex justify-between items-center">
+      <footer className="py-12 md:py-24 border-t border-slate-100 flex justify-between items-center">
         <span className="text-xs font-black tracking-tighter text-slate-900 uppercase">
           Oaks Protocol
         </span>

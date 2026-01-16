@@ -109,13 +109,13 @@ export default function DashboardLayout() {
 
         <div
           className={`flex-1 overflow-y-auto ${
-            !sidebarOpen ? "pt-24 max-md:pt-4" : "pt-0"
+            !sidebarOpen ? "pt-4 md:pt-24" : "pt-0"
           } lg:p-16 transition-all duration-300`}
         >
           <div
             className={`${
               sidebarOpen ? "max-w-8xl" : "max-w-full"
-            } mx-auto px-6 max-md:px-3 lg:px-0 transition-all duration-500`}
+            } mx-auto px-3 md:px-6 lg:px-0 transition-all duration-500`}
           >
             <Outlet />
           </div>
