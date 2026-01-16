@@ -18,12 +18,12 @@ export default function MainLayout() {
 
         <div className="flex items-center gap-8 md:gap-12">
           <div className="hidden md:flex space-x-8 text-[10px] font-black uppercase tracking-widest text-slate-500">
-            <Link to="/" className="hover:text-slate-900 transition-colors">
+            <Link to="/" className="nav-link">
               Courses
             </Link>
             <Link
               to="/about"
-              className="hover:text-slate-900 transition-colors"
+              className="nav-link"
             >
               About
             </Link>
@@ -31,7 +31,7 @@ export default function MainLayout() {
 
           <Link
             to="/dashboard"
-            className="border-2 border-slate-900 px-6 py-2 text-[10px] font-black uppercase tracking-widest text-slate-900 hover:bg-slate-900 hover:text-white transition-all"
+            className="btn-outline"
           >
             Learning Portal
           </Link>

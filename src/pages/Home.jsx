@@ -84,10 +84,10 @@ export default function Home() {
               key={course.id}
               // 3. Use the dynamic destination here
               to={destination}
-              className="group flex flex-col md:flex-row md:items-center justify-between py-12 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
+              className="group flex flex-col md:flex-row md:items-center justify-between py-12 max-md:py-6 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
             >
               <div className="flex items-start md:items-center gap-10 md:gap-20">
-                <span className="font-mono text-[10px] font-bold text-slate-400 group-hover:text-indigo-600">
+                <span className="font-mono text-[10px] font-bold text-slate-400 group-hover:text-indigo-600 max-md:hidden">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
@@ -95,17 +95,17 @@ export default function Home() {
                   <span className="text-[10px] font-bold text-indigo-500 mb-2 block tracking-tight uppercase">
                     Professional Course
                   </span>
-                  <h3 className="text-3xl font-bold text-slate-900 group-hover:text-indigo-600 leading-tight">
+                  <h3 className="text-3xl max-md:text-2xl font-bold text-slate-900 group-hover:text-indigo-600 leading-tighter">
                     {course.title}
                   </h3>
-                  <p className="text-slate-600 mt-2 font-medium leading-relaxed">
+                  <p className="text-slate-600 mt-2 font-medium max-md:text-sm leading-relaxed">
                     {course.description ||
                       "In-depth implementation of scalable industry patterns."}
                   </p>
                 </div>
               </div>
 
-              <div className="mt-8 md:mt-0 flex items-center gap-12 self-end md:self-center">
+              <div className="mt-4 md:mt-0 flex items-center gap-12 max-md:gap-6 self-end md:self-center">
                 <div className="text-right">
                   <p className="text-[10px] font-bold text-slate-400 mb-1 uppercase">
                     Tuition
@@ -123,7 +123,7 @@ export default function Home() {
             </Link>
           ))
         ) : (
-          <div className="py-24 text-center">
+          <div className="py-24 max-md:py-12 text-center">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">
               No courses found matching "{query}"
             </p>
@@ -132,8 +132,8 @@ export default function Home() {
       </section>
 
       {/* --- TRUST GRID --- */}
-      <section className="py-24 border-t border-slate-100">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <section className="py-24 max-md:py-12 border-t border-slate-100">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 max-md:gap-8">
           {[
             {
               title: "Access",
@@ -165,7 +165,7 @@ export default function Home() {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="py-24 border-t border-slate-100 flex justify-between items-center">
+      <footer className="py-24 max-md:py-8 border-t border-slate-100 flex justify-between items-center">
         <span className="text-xs font-black tracking-tighter text-slate-900 uppercase">
           Oaks Protocol
         </span>

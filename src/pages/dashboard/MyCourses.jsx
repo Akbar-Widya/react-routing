@@ -14,7 +14,7 @@ export default function MyCourses() {
   }, [courses, query]);
 
   return (
-    <div className="max-w-4xl space-y-12">
+    <div className="max-w-4xl space-y-12 max-md:space-y-6">
       <header className="space-y-8">
         <div>
           <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase">
@@ -46,9 +46,9 @@ export default function MyCourses() {
             <Link
               key={course.id}
               to={`/dashboard/courses/${course.id}`}
-              className="group flex flex-col py-10 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
+              className="group flex flex-col py-10 max-md:py-3 border-b border-slate-100 transition-colors hover:bg-slate-50 px-4 -mx-4"
             >
-              <div className="flex justify-between items-start mb-6">
+              <div className="flex justify-between items-start mb-6 max-md:mb-2">
                 <div className="flex items-center gap-8 min-w-0">
                   <span className="font-mono text-[10px] font-bold text-slate-400 shrink-0">
                     {String(index + 1).padStart(2, "0")}

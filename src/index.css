@@ -4,3 +4,11 @@
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
+
+.nav-link {
+  @apply hover:text-slate-900 transition-colors;
+}
+
+.btn-outline {
+  @apply border-2 border-slate-900 px-6 py-2 text-[10px] font-black uppercase tracking-widest text-slate-900 hover:bg-slate-900 hover:text-white transition-all
+}
