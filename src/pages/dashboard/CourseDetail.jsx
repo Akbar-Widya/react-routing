@@ -40,16 +40,16 @@ export default function CourseDetail() {
         <div className="flex items-center gap-3 mb-4">
           <Link
             to="/dashboard/courses"
-            className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest hover:text-indigo-600 transition-colors"
+            className="text-[10px] font-semibold text-slate-400 uppercase md:tracking-widest hover:text-indigo-600 transition-colors"
           >
             ← Back to Courses
           </Link>
-          <span className="text-[10px] font-semibold text-indigo-600 uppercase tracking-widest">
+          <span className="text-[10px] font-semibold text-indigo-600 uppercase md:tracking-widest">
             // {courseData.category || "Professional Training"}
           </span>
-          <div className="h-[1px] w-8 bg-slate-200"></div>
+          <div className="hidden md:block h-[1px] w-8 bg-slate-200"></div>
           {/* Softened progress label */}
-          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
+          <span className="text-[10px] font-semibold text-slate-400 uppercase md:tracking-widest">
             {progress}% Mastery
           </span>
         </div>
