@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="py-8 md:py-16 border-t border-slate-100 flex justify-between items-center">
+    <footer className="max-w-6xl mx-auto w-full px-8 py-8 md:py-16 border-t border-slate-100 flex justify-between items-center">
       <span className="text-xs font-black tracking-tighter text-slate-900 uppercase">
         Oaks Protocol
       </span>

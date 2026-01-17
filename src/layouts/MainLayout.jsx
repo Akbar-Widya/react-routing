@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 
 export default function MainLayout() {
   return (
@@ -39,9 +39,7 @@ export default function MainLayout() {
       </main>
 
       {/* Footer ditambahkan di sini agar muncul di semua halaman */}
-      <div className="px-8 md:px-12">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 
 export default function AuthLayout() {
   return (
@@ -26,9 +26,7 @@ export default function AuthLayout() {
       </main>
 
       {/* --- FOOTER --- */}
-      <div className="px-3 md:px-8">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }
