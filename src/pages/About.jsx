@@ -91,20 +91,6 @@ export default function About() {
           </span>
         </Link>
       </section>
-
-      {/* --- FOOTER --- */}
-      <footer className="py-24 border-t border-slate-100 flex justify-between items-center">
-        <span className="text-xs font-black tracking-tighter text-slate-900 uppercase">
-          Oaks Protocol
-        </span>
-
-        <div className="flex items-center gap-8">
-          <span className="text-[10px] font-bold text-slate-600 tracking-widest uppercase text-right">
-            Project by Akbar Widya // 2026
-          </span>
-          <div className="w-2 h-2 bg-indigo-600"></div>
-        </div>
-      </footer>
     </div>
   );
 }

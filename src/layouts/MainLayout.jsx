@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
+import Footer from "./Footer";
 
 export default function MainLayout() {
   return (
@@ -21,26 +22,26 @@ export default function MainLayout() {
             <Link to="/" className="nav-link">
               Courses
             </Link>
-            <Link
-              to="/about"
-              className="nav-link"
-            >
+            <Link to="/about" className="nav-link">
               About
             </Link>
           </div>
 
-          <Link
-            to="/dashboard"
-            className="btn-outline"
-          >
+          <Link to="/dashboard" className="btn-outline">
             Learning Portal
           </Link>
         </div>
       </nav>
 
+      {/* Konten utama yang berubah-ubah */}
       <main className="flex-grow">
         <Outlet />
       </main>
+
+      {/* Footer ditambahkan di sini agar muncul di semua halaman */}
+      <div className="px-8 md:px-12">
+        <Footer />
+      </div>
     </div>
   );
 }

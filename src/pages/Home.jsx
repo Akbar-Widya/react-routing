@@ -93,7 +93,7 @@ export default function Home() {
                   <h3 className="text-2xl md:text-3xl font-bold text-slate-900 group-hover:text-indigo-600 leading-tighter">
                     {course.title}
                   </h3>
-                  <p className="text-slate-600 mt-2 text-sm md:font-medium leading-relaxed">
+                  <p className="text-slate-600 mt-2 text-sm md:font-medium leading-tight">
                     {course.description ||
                       "In-depth implementation of scalable industry patterns."}
                   </p>
@@ -158,20 +158,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* --- FOOTER --- */}
-      <footer className="py-12 md:py-24 border-t border-slate-100 flex justify-between items-center">
-        <span className="text-xs font-black tracking-tighter text-slate-900 uppercase">
-          Oaks Protocol
-        </span>
-
-        <div className="flex items-center gap-8">
-          <span className="text-[10px] font-bold text-slate-600 tracking-widest uppercase text-right">
-            Project by Akbar Widya // 2026
-          </span>
-          <div className="w-2 h-2 bg-indigo-600"></div>
-        </div>
-      </footer>
     </div>
   );
 }

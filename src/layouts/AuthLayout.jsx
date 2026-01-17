@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
+import Footer from "./Footer";
 
 export default function AuthLayout() {
   return (
@@ -25,18 +26,9 @@ export default function AuthLayout() {
       </main>
 
       {/* --- FOOTER --- */}
-      <footer className="pb-8 px-6 border-t border-slate-100 flex justify-between items-center">
-        <span className="text-xs font-black tracking-tighter text-slate-900 uppercase">
-          Oaks Protocol
-        </span>
-
-        <div className="flex items-center gap-8">
-          <span className="text-[10px] font-bold text-slate-600 tracking-widest uppercase text-right">
-            Project by Akbar Widya // 2026
-          </span>
-          <div className="w-2 h-2 bg-indigo-600"></div>
-        </div>
-      </footer>
+      <div className="px-3 md:px-8">
+        <Footer />
+      </div>
     </div>
   );
 }
